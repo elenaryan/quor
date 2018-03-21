@@ -52,6 +52,11 @@ class QBoard:
 		if (len(reachable.intersection(self.winset))==0):
 			return False
 		return True
+	def canStillWin2(self):
+		reachable = self.graph.reachable_from(self.player2)
+		if (len(reachable.intersection(self.winset))==0):
+			return False
+		return True
 
 	def getDistTo(self,coord):
 		dist = {}

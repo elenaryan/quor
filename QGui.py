@@ -27,7 +27,7 @@ from Tkinter import *
 import random
 import QBoard as qu
 
-def draw_quoridor(can, walls=[], player=(4,8), player2=(4, 0)):
+def draw_quoridor(can, walls=[], path=[], player=(4,8), player2=(4, 0)):
     side = 9
     smallw=50
     smallh=50
@@ -39,7 +39,7 @@ def draw_quoridor(can, walls=[], player=(4,8), player2=(4, 0)):
             fillcolor='darkgray'
             can.create_rectangle(xcorn,ycorn,xcorn+smallw,ycorn+smallh,fill=fillcolor)
     draw_mult_walls(can, walls)
-    #draw_path(can, path)
+    draw_path(can, path)
     draw_player(can, player)
     draw_player2(can, player2)
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
     # once you have the board working, uncomment this line
     myboard = qu.QBoard()
-    '''
+    
     walls = [(1,0,'v'), (2,0,'v'), (0,2,'h'),  (6,2,'h'), (0,8,'h'), (2,8,'h'), (5,5,'v'), (1,4,'h'), (5,6,'h'), (5,3,'v'), (3,3,'v'), (3,4,'h')]
     
     # when you have the graph representation working, you can add the walls with the following loop 
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     #draw_quoridor(canvas, walls, [(4,8), (4,7), (4, 6)], start)
     window.mainloop()
         
-    '''
+    
     # to test, place walls in this list
     # Below here, read through the valid file and turn it into the game board
 
@@ -134,10 +134,13 @@ if __name__ == '__main__':
     
     f = raw_input("Enter a file containing quoridor moves.  The appropriate format is <turn number><color>.<column><row><OPTIONALdirection>\ni.e. 1b.e8 means on the first round black moves to the 8th position.\n")
     fp = open(f, 'r')
+    i = 0
     for line in fp.readlines():
+        i +=1
         #print line
         #f = raw_input("Enter a move in the format <turnnumber><color>.<col><row><walldirection>")
         move = line.split(";")
+        
         for m in move:
                     m.rstrip() #strip whitespace
                     place = (int(m[3]),int(m[4])) #tuple off the rows and columns
@@ -147,7 +150,11 @@ if __name__ == '__main__':
                         else:
                                         myboard.placePlayer2(place)
                     else:
-                                myboard.addWall(place,m[5])                            
+                        myboard.addWall(place, m[5])
+                        if  not (myboard.canStillWin() and myboard.canStillWin2()):
+                                print "Illegal Wall Move, no Blocking!"
+                        #add remove wall method
+        #if i == 1:
+        # #       path = []
+        #        draw_quoridor(canvas, myboard.getWalls(), path, myboard.player, myboard.player2)
 
-
-    draw_quoridor(canvas, myboard.getWalls(), myboard.player, myboard.player2)
