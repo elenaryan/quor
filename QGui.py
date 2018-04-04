@@ -151,10 +151,11 @@ if __name__ == '__main__':
                                         myboard.placePlayer2(place)
                     else:
                         myboard.addWall(place, m[5])
+                        print place, m[5]
                         if  not (myboard.canStillWin() and myboard.canStillWin2()):
                                 print "Illegal Wall Move, no Blocking!"
                         #add remove wall method
         #if i == 1:
         # #       path = []
-        #        draw_quoridor(canvas, myboard.getWalls(), path, myboard.player, myboard.player2)
+    draw_quoridor(canvas, myboard.getWalls(), path, myboard.player, myboard.player2)
 
