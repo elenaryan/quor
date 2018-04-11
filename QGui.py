@@ -39,7 +39,7 @@ def draw_quoridor(can, walls=[], path=[], player=(4,8), player2=(4, 0)):
             fillcolor='darkgray'
             can.create_rectangle(xcorn,ycorn,xcorn+smallw,ycorn+smallh,fill=fillcolor)
     draw_mult_walls(can, walls)
-    draw_path(can, path)
+    #draw_path(can, path)
     draw_player(can, player)
     draw_player2(can, player2)
 
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     myboard = qu.QBoard()
     
     walls = [(1,0,'v'), (2,0,'v'), (0,2,'h'),  (6,2,'h'), (0,8,'h'), (2,8,'h'), (5,5,'v'), (1,4,'h'), (5,6,'h'), (5,3,'v'), (3,3,'v'), (3,4,'h')]
-    
+    '''
     # when you have the graph representation working, you can add the walls with the following loop 
     for w in walls:
         (x,y,d) = w
@@ -119,12 +119,15 @@ if __name__ == '__main__':
 
     # these lines should eventually draw the shortest path from start to dest
     myboard.placePlayer(start)
-    draw_quoridor(canvas, myboard.getWalls(), myboard.shortestPathTo(dest),start)
+    #draw_quoridor(canvas, myboard.getWalls(), myboard.shortestPathTo(dest),start)
         # ^ currently has another field that holds starting position of player 2
     # test call 
-    #draw_quoridor(canvas, walls, [(4,8), (4,7), (4, 6)], start)
+    draw_quoridor(canvas, walls, [(4,8), (4,7), (4, 6)], start)
+    print canvas
+    print walls
+    print start
     window.mainloop()
-        
+    '''    
     
     # to test, place walls in this list
     # Below here, read through the valid file and turn it into the game board
@@ -142,20 +145,31 @@ if __name__ == '__main__':
         move = line.split(";")
         
         for m in move:
-                    m.rstrip() #strip whitespace
+                    m = m.strip('\n') #strip whitespace
+                    #for l in m:
+                        #print "within "+m+" is "+l
                     place = (int(m[3]),int(m[4])) #tuple off the rows and columns
-                    if len(m) != 6:
+                    #print place
+                    #print "Length of "+m+"is "
+                    #print len(m)
+                    if len(m) <= 5:
                         if m[1] == 'b':
                                         myboard.placePlayer(place)
                         else:
                                         myboard.placePlayer2(place)
                     else:
+                        print m[5]
                         myboard.addWall(place, m[5])
+                        #THIS IS FUNDAMENTALLY INCORRECT
+                        
                         print place, m[5]
                         if  not (myboard.canStillWin() and myboard.canStillWin2()):
                                 print "Illegal Wall Move, no Blocking!"
                         #add remove wall method
         #if i == 1:
         # #       path = []
-    draw_quoridor(canvas, myboard.getWalls(), path, myboard.player, myboard.player2)
+    draw_quoridor(canvas, myboard.getWalls(), [(4,8), (4,7), (4, 6)], myboard.player, myboard.player2)
+    window.mainloop()
+    #no clue what this does and I should figure that out
+    
 
