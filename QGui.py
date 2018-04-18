@@ -15,7 +15,8 @@
                         i. This can be fairly easily accomplished by utilization of QBoard and Qgraph
 
 
-
+EDITS 4/15
+    added a time functionality to attempt to print the board after every move
 
 '''
 
@@ -26,6 +27,7 @@
 from Tkinter import *
 import random
 import QBoard as qu
+import time
 
 def draw_quoridor(can, walls=[], path=[], player=(4,8), player2=(4, 0)):
     side = 9
@@ -166,9 +168,13 @@ if __name__ == '__main__':
                         if  not (myboard.canStillWin() and myboard.canStillWin2()):
                                 print "Illegal Wall Move, no Blocking!"
                         #add remove wall method
+                    window.update()
+                    draw_quoridor(canvas, myboard.getWalls(), [(4,8), (4,7), (4,6)], myboard.player, myboard.player2)
+                    #window.mainloop()
+                    time.sleep(1)
         #if i == 1:
         # #       path = []
-    draw_quoridor(canvas, myboard.getWalls(), [(4,8), (4,7), (4, 6)], myboard.player, myboard.player2)
+    #draw_quoridor(canvas, myboard.getWalls(), [(4,8), (4,7), (4, 6)], myboard.player, myboard.player2)
     window.mainloop()
     #no clue what this does and I should figure that out
     
