@@ -3,7 +3,8 @@ from UGraph import UGraph
 
 #to make compatible with drawing, need to 0 index starting with
 # (0,0) in top left
-'''
+'''     Original code written by Dr. Scott Yilek as part of pythonic implementation of Quoridor
+        Any additions are noted below or inline and added/written by Elena Ryan
 
         Made some changes so that everything works with 2 players on the board.
         NOT elegant, but highly functional
@@ -46,6 +47,11 @@ class QBoard:
 
 	def getWalls(self):
 		return self.walls
+
+	#This is new and it's a little tough, but it will make it easier to create
+	# valid, random games
+	def setWalls(self, nwalls)
+                self.walls = nwalls
 
 	def canStillWin(self):
 		reachable = self.graph.reachable_from(self.player)

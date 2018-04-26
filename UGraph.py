@@ -1,5 +1,8 @@
 from collections import deque
-
+"""
+        Original code writted by Dr. Scott Yilek (UST, St. Paul, MN)
+        Any additions noted and written by Elena Ryan
+"""
 
 class UGraph:
 	# undirected graph will be adjacency list format

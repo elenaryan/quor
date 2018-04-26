@@ -1,6 +1,10 @@
 # code derived from checkerboard code at http://www.cs.bc.edu/~straubin/cs101-2014/checkerboard.py , though with many modifications.
 
 '''
+        Original code (GUI construction, board implementation, etc.) written by Dr. Scott Yilek
+        Additions, edits, etc. noted below or inline and writted by Elena Ryan
+        
+        
         Code altered 3/2018 as part of quoridor implementation
         Currently connected to the quoridor.py driver which basically just
         needs to translate our chosen acceptable formatting into something that
