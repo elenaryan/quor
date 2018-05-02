@@ -50,8 +50,16 @@ class QBoard:
 
 	#This is new and it's a little tough, but it will make it easier to create
 	# valid, random games
-	def setWalls(self, nwalls):
-                self.walls = nwalls
+	def remWall(self, topleftof, direction):
+                (x,y) = topleftof
+		self.walls.remove((x,y,direction))
+		if (direction == 'v'):
+			# vertical wall
+			self.graph.addEdge((x,y), (x-1,y), 1)			
+			self.graph.addEdge((x,y+1), (x-1,y+1), 1)			
+		elif (direction == 'h'):
+			self.graph.addEdge((x,y), (x,y-1), 1)			
+			self.graph.addEdge((x+1,y), (x+1,y-1), 1)
 
 	def canStillWin(self):
 		reachable = self.graph.reachable_from(self.player)
