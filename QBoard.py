@@ -32,7 +32,7 @@ class QBoard:
 	def placePlayer(self, coord):
 		self.player = coord
 	def placePlayer2(self, coord):
-                self.player2 = coord
+		self.player2 = coord
 
 	def addWall(self,topleftof, direction):
 		(x,y) = topleftof
@@ -50,7 +50,7 @@ class QBoard:
 
 	#This is new and it's a little tough, but it will make it easier to create
 	# valid, random games
-	def setWalls(self, nwalls)
+	def setWalls(self, nwalls):
                 self.walls = nwalls
 
 	def canStillWin(self):
