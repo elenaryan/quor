@@ -12,6 +12,7 @@
 import QBoard as q
 import random
 
+#import QGui as gui
 
 #gotta decide how we wanna structure this bad boy
 #at this point will create a text file of valid games
@@ -25,188 +26,169 @@ import random
 
 
 def main():
+    game = GameGen()
+    game.generategame()
+    #generategame()
     print "Velkommen"
-    generategame()
-
-def generategame():
-    walls1 = 10
-    walls2 = 10
-    pos1   = 4,8
-    pos2   = 4,0
-    turn   = 0
-    game   = ""
-    chosen = 0 #basically a flag to make sure choices fall within range
-    moves = []
-    game = q.QBoard()
-    game.placePlayer(pos1)
-    game.placePlayer2(pos2)
+class GameGen:
     
-    while pos1[1] != 0 and pos2[1] !=8:
-        if turn % 2 == 0:
-            flip = random.randint(0,1)
-            if flip == 0:
-                if walls1 > 0:
-                    wplace = 0
-                    while wplace == 0:
-                        direct = ['v', 'h']
-                        ind1 = random.randint(0,8)
-                        ind2 = random.randint(0,8)
-                        dirw = direct[random.randint(0,1)]
-                        try:
-                            game.addWall((ind1, ind2), dirw)#to place the wall
-                            if (not(game.canStillWin()) or not(game.canStillWin2())):
-                                print "IT WORKS"
-                                game.remWall((ind1, ind2), dirw)
-                            else:
-                                walls1 = walls1 - 1
-                                wplace = 1
-                        except:
-                            print str(ind1) + " " + str(ind2) + " " + dirw
-                            game.remWall((ind1, ind2), dirw)
-                            #pass
-                    else:
-                        pass
-                    '''
-                        poss1 = [pos1[0]+1, pos1[0]-1]
-                        poss2 = [pos1[1]+1, pos1[1]-1]
-                        flip = random.randint(0,1)
-                        chosen = 0
-                        while chosen == 0:
-                            flip = random.randint(0,1)
-                            if flip == 0:
-                                flip = random.randint(0,1)
-                                mv = poss1[flip]
-                                if mv >=0 and mv <=8 and (mv, pos1[1]) != pos2:
-                            
-                                    pos1 = mv,pos1[1]
-                                    chosen = 1
-                            else:
-                                flip = random.randint(0,1)
-                                mv = poss2[flip]
-                                if mv >=0 and mv <=8 and (pos1[0], mv) != pos2:
-                                    pos1 = pos1[0],mv
-                                    chosen = 1
-                    '''        
-                            
-
-                           
-            else:
-                poss1 = [pos1[0]+1, pos1[0]-1]
-                poss2 = [pos1[1]+1, pos1[1]-1]
+    def generategame(self):
+        walls1 = 10
+        walls2 = 10
+        pos1   = 4,8
+        pos2   = 4,0
+        turn   = 0
+        game   = ""
+        chosen = 0 #basically a flag to make sure choices fall within range
+        moves = []
+        game = q.QBoard()
+        game.placePlayer(pos1)
+        game.placePlayer2(pos2)
+        
+        while pos1[1] != 0 and pos2[1] !=8:
+            if turn % 2 == 0:
                 flip = random.randint(0,1)
-                chosen = 0
-                while chosen == 0:
-                    flip = random.randint(0,1)
-                    if flip == 0:
-                        flip = random.randint(0,1)
-                        mv = poss1[flip]
-                        if mv >=0 and mv <=8 and (mv, pos1[1]) != pos2:
-                            
-                            pos1 = mv,pos1[1]
-                            chosen = 1
-                    else:
-                        flip = random.randint(0,1)
-                        mv = poss2[flip]
-                        if mv >=0 and mv <=8 and (pos1[0], mv) != pos2:
-                            pos1 = pos1[0],mv
-                            chosen = 1
-
-        else:
-            flip = random.randint(0,1)
-            if flip == 0:
-                if walls2 > 0:
-                    wplace = 0
-                    while wplace == 0:
-                        direct = ['v', 'h']
-                        ind1 = random.randint(0,8)
-                        ind2 = random.randint(0,8)
-                        dirw = direct[random.randint(0,1)]
-                        try:
-                            game.addWall((ind1, ind2), dirw)#to place the wall
-                            if (not(game.canStillWin()) or not(game.canStillWin2())):
-                                print "IT WORKS"
+                if flip == 0:
+                    if walls1 > 0:
+                        wplace = 0
+                        while wplace == 0:
+                            direct = ['v', 'h']
+                            ind1 = random.randint(0,8)
+                            ind2 = random.randint(0,8)
+                            dirw = direct[random.randint(0,1)]
+                            try:
+                                game.addWall((ind1, ind2), dirw)#to place the wall
+                                if (not(game.canStillWin()) or not(game.canStillWin2())):
+                                    print "IT WORKS"
+                                    game.remWall((ind1, ind2), dirw)
+                                else:
+                                    walls1 = walls1 - 1
+                                    wplace = 1
+                            except:
+                                print str(ind1) + " " + str(ind2) + " " + dirw
                                 game.remWall((ind1, ind2), dirw)
-                            else:
-                                walls2 = walls2 - 1
-                                wplace = 1
-                        except:
-                            print str(ind1) + " " + str(ind2) + " " + dirw
-                            game.remWall((ind1, ind2), dirw)
-                            #pass
-                    else:
-                        pass
-                    '''
-                        poss1 = [pos1[0]+1, pos1[0]-1]
-                        poss2 = [pos1[1]+1, pos1[1]-1]
-                        flip = random.randint(0,1)
-                        chosen = 0
-                        while chosen == 0:
+                                #pass
+                        else:
+                            pass
+                        '''
+                            poss1 = [pos1[0]+1, pos1[0]-1]
+                            poss2 = [pos1[1]+1, pos1[1]-1]
                             flip = random.randint(0,1)
-                            if flip == 0:
+                            chosen = 0
+                            while chosen == 0:
                                 flip = random.randint(0,1)
-                                mv = poss1[flip]
-                                if mv >=0 and mv <=8 and (mv, pos1[1]) != pos2:
-                            
-                                    pos1 = mv,pos1[1]
-                                    chosen = 1
-                            else:
-                                flip = random.randint(0,1)
-                                mv = poss2[flip]
-                                if mv >=0 and mv <=8 and (pos1[0], mv) != pos2:
-                                    pos1 = pos1[0],mv
-                                    chosen = 1
-                    '''        
-                            
+                                if flip == 0:
+                                    flip = random.randint(0,1)
+                                    mv = poss1[flip]
+                                    if mv >=0 and mv <=8 and (mv, pos1[1]) != pos2:
+                                
+                                        pos1 = mv,pos1[1]
+                                        chosen = 1
+                                else:
+                                    flip = random.randint(0,1)
+                                    mv = poss2[flip]
+                                    if mv >=0 and mv <=8 and (pos1[0], mv) != pos2:
+                                        pos1 = pos1[0],mv
+                                        chosen = 1
+                        '''        
+                                
 
-                           
-            else:
-                poss1 = [pos2[0]+1, pos2[0]-1]
-                poss2 = [pos2[1]+1, pos2[1]-1]
-                flip = random.randint(0,1)
-                chosen = 0
-                while chosen == 0:
+                               
+                else:
+                    poss1 = [pos1[0]+1, pos1[0]-1]
+                    poss2 = [pos1[1]+1, pos1[1]-1]
                     flip = random.randint(0,1)
-                    if flip == 0:
+                    chosen = 0
+                    while chosen == 0:
                         flip = random.randint(0,1)
-                        mv = poss1[flip]
-                        if mv >=0 and mv <=8 and (mv, pos2[1]) != pos1:
-                            
-                            pos2 = mv,pos2[1]
-                            chosen = 1
-                    else:
+                        if flip == 0:
+                            flip = random.randint(0,1)
+                            mv = poss1[flip]
+                            if mv >=0 and mv <=8 and (mv, pos1[1]) != pos2:
+                                
+                                pos1 = mv,pos1[1]
+                                chosen = 1
+                        else:
+                            flip = random.randint(0,1)
+                            mv = poss2[flip]
+                            if mv >=0 and mv <=8 and (pos1[0], mv) != pos2:
+                                pos1 = pos1[0],mv
+                                chosen = 1
+
+            else:
+                flip = random.randint(0,1)
+                if flip == 0:
+                    if walls2 > 0:
+                        wplace = 0
+                        while wplace == 0:
+                            direct = ['v', 'h']
+                            ind1 = random.randint(0,8)
+                            ind2 = random.randint(0,8)
+                            dirw = direct[random.randint(0,1)]
+                            try:
+                                game.addWall((ind1, ind2), dirw)#to place the wall
+                                if (not(game.canStillWin()) or not(game.canStillWin2())):
+                                    print "IT WORKS"
+                                    game.remWall((ind1, ind2), dirw)
+                                else:
+                                    walls2 = walls2 - 1
+                                    wplace = 1
+                            except:
+                                print str(ind1) + " " + str(ind2) + " " + dirw
+                                game.remWall((ind1, ind2), dirw)
+                                #pass
+                        else:
+                            pass
+
+                               
+                else:
+                    poss1 = [pos2[0]+1, pos2[0]-1]
+                    poss2 = [pos2[1]+1, pos2[1]-1]
+                    flip = random.randint(0,1)
+                    chosen = 0
+                    while chosen == 0:
                         flip = random.randint(0,1)
-                        mv = poss2[flip]
-                        if mv >=0 and mv <=8 and (pos2[0], mv) != pos1:
-                            pos2 = pos2[0],mv
-                            chosen = 1
+                        if flip == 0:
+                            flip = random.randint(0,1)
+                            mv = poss1[flip]
+                            if mv >=0 and mv <=8 and (mv, pos2[1]) != pos1:
+                                
+                                pos2 = mv,pos2[1]
+                                chosen = 1
+                        else:
+                            flip = random.randint(0,1)
+                            mv = poss2[flip]
+                            if mv >=0 and mv <=8 and (pos2[0], mv) != pos1:
+                                pos2 = pos2[0],mv
+                                chosen = 1
+                
+                #pass
             
-            #pass
-        
 
 
 
 
-        
-        moves.append((pos1, turn))
-        turn = turn + 1 #just making sure we keep alternating bt turns
-    #print "We Have Reached the end! \n"
-    if pos1[1] == 0:
-        print "Player 1 wins! "
-    else:
-        print "Player 2 wins! "
-    print "Total turns: "+str(turn-1)
-    print pos1
-    print pos2
-    print "Player 1 has "+str(walls1)+" remaining"
-    print "Player 2 has "+str(walls2)+" remaining"
-    #print moves
-    print len(game.getWalls())
-    #At the end, depending who wins, loop through the array of tuples and create a new array
-    #where the winning teams moves are tagged with win or loss
+            
+            moves.append((pos1, turn))
+            turn = turn + 1 #just making sure we keep alternating bt turns
+        #print "We Have Reached the end! \n"
+        if pos1[1] == 0:
+            print "Player 1 wins! "
+        else:
+            print "Player 2 wins! "
+        print "Total turns: "+str(turn-1)
+        print pos1
+        print pos2
+        print "Player 1 has "+str(walls1)+" remaining"
+        print "Player 2 has "+str(walls2)+" remaining"
+        print moves
+        print game.getWalls()
+        #At the end, depending who wins, loop through the array of tuples and create a new array
+        #where the winning teams moves are tagged with win or loss
 
 
 if __name__ == "__main__":
-    main()
+        main()
 
 
-    
+        
